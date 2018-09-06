@@ -7,6 +7,7 @@ package mcvet.Formularios.Cliente;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import mcvet.Formularios.Mascota.ListaMascota;
 
@@ -152,6 +153,11 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         });
 
         btnFinalizar.setText("Finalizar");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Opciones para agregar");
@@ -193,6 +199,7 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
 
     private void rbAlComienzoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAlComienzoActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_rbAlComienzoActionPerformed
 
     private void rbAlFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAlFinalActionPerformed
@@ -213,6 +220,23 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         a.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        // TODO add your handling code here:
+        if(rbAlComienzo.isSelected()){
+            //JOptionPane.showMessageDialog(this, "al comienzo ");
+            //invoca el metodo para añadir al comienzo
+        }else if(rbAlFinal.isSelected()){
+            JOptionPane.showMessageDialog(this, "al final ");
+        }else if(rbAntesDelCliente.isSelected()){
+            JOptionPane.showMessageDialog(this, "antes de un fulano  ");
+        }else if(rbDespuesDelCliente.isSelected()){
+            JOptionPane.showMessageDialog(this, "despues del fulano");
+        }else{
+            JOptionPane.showMessageDialog(this, "no selecciono ninguna");
+        }
+        
+    }//GEN-LAST:event_btnFinalizarActionPerformed
 
     /**
      * @param args the command line arguments
