@@ -10,7 +10,7 @@ package mcvet;
  * @author Julian
  */
 public class ListaDobleMascota {
-
+// esta mierda tiene que dar
     NodoMascota primero;
 
     // Buscar un elemento ->
