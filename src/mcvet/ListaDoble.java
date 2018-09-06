@@ -10,7 +10,7 @@ package mcvet;
  * @author Julian
  */
 public class ListaDoble {
-//papi eso no da
+//papi eso no da tfdxsgfdx
     Nodo primero;
 
     public Nodo desconectar(int contenido) {
