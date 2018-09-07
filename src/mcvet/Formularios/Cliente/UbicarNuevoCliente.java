@@ -26,8 +26,8 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         setResizable(false);
 
         // llama al metodo que valida que solo sean numeros
-        SoloNumeros(AntesDe);
-        SoloNumeros(DespuesDe);
+        SoloNumeros(antesDelCliente);
+        SoloNumeros(despuesDelCliente);
     }
 
     //Metodo que balida que la entrada solo sea de numeros
@@ -63,8 +63,8 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         rbAlFinal = new javax.swing.JRadioButton();
         rbAntesDelCliente = new javax.swing.JRadioButton();
         rbDespuesDelCliente = new javax.swing.JRadioButton();
-        AntesDe = new javax.swing.JTextField();
-        DespuesDe = new javax.swing.JTextField();
+        antesDelCliente = new javax.swing.JTextField();
+        despuesDelCliente = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -93,6 +93,11 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
 
         buttonGroup1.add(rbAntesDelCliente);
         rbAntesDelCliente.setText("Antes del cliente con el codigo");
+        rbAntesDelCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbAntesDelClienteMouseClicked(evt);
+            }
+        });
         rbAntesDelCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbAntesDelClienteActionPerformed(evt);
@@ -102,11 +107,14 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         buttonGroup1.add(rbDespuesDelCliente);
         rbDespuesDelCliente.setText("Después del cliente con el codigo");
 
-        AntesDe.addActionListener(new java.awt.event.ActionListener() {
+        antesDelCliente.setEnabled(false);
+        antesDelCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AntesDeActionPerformed(evt);
+                antesDelClienteActionPerformed(evt);
             }
         });
+
+        despuesDelCliente.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,13 +126,13 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(rbAntesDelCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AntesDe))
+                        .addComponent(antesDelCliente))
                     .addComponent(rbAlFinal)
                     .addComponent(rbAlComienzo)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(rbDespuesDelCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DespuesDe, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(despuesDelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,10 +145,10 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(rbAntesDelCliente)
-                    .addComponent(AntesDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(antesDelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DespuesDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(despuesDelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbDespuesDelCliente))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -210,9 +218,9 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbAntesDelClienteActionPerformed
 
-    private void AntesDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntesDeActionPerformed
+    private void antesDelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_antesDelClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AntesDeActionPerformed
+    }//GEN-LAST:event_antesDelClienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
@@ -223,20 +231,31 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
-        if(rbAlComienzo.isSelected()){
+
+        
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    private void rbAntesDelClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbAntesDelClienteMouseClicked
+        // TODO add your handling code here:
+        //AntesDe.setEnabled(true);
+                if(rbAlComienzo.isSelected()){
             //JOptionPane.showMessageDialog(this, "al comienzo ");
             //invoca el metodo para añadir al comienzo
         }else if(rbAlFinal.isSelected()){
             JOptionPane.showMessageDialog(this, "al final ");
         }else if(rbAntesDelCliente.isSelected()){
-            JOptionPane.showMessageDialog(this, "antes de un fulano  ");
+            antesDelCliente.setEnabled(true);
+            despuesDelCliente.setEnabled(false);
+            //JOptionPane.showMessageDialog(this, "antes de un fulano  ");
         }else if(rbDespuesDelCliente.isSelected()){
-            JOptionPane.showMessageDialog(this, "despues del fulano");
+            antesDelCliente.setEnabled(false);
+            despuesDelCliente.setEnabled(true);
+            
+            //JOptionPane.showMessageDialog(this, "despues del fulano");
         }else{
             JOptionPane.showMessageDialog(this, "no selecciono ninguna");
         }
-        
-    }//GEN-LAST:event_btnFinalizarActionPerformed
+    }//GEN-LAST:event_rbAntesDelClienteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -274,8 +293,7 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField AntesDe;
-    private javax.swing.JTextField DespuesDe;
+    private javax.swing.JTextField antesDelCliente;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -284,6 +302,7 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.ButtonGroup buttonGroup6;
+    private javax.swing.JTextField despuesDelCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton rbAlComienzo;

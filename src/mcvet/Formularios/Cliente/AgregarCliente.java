@@ -194,9 +194,9 @@ public class AgregarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         UbicarNuevoCliente a = new UbicarNuevoCliente();
         if (txtIdentificacion.getText().equals("")
-                && txtNombre.getText().equals("")
-                && txtDireccion.getText().equals("")
-                && txtTelefono.getText().equals("")) {
+                || txtNombre.getText().equals("")
+                || txtDireccion.getText().equals("")
+                || txtTelefono.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "No ha completado la información, por favor revise e intente nuevamente  ");
         } else {
             //Agregar el nodo del nuevo liente a la lista
