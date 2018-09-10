@@ -4,18 +4,29 @@
  * and open the template in the editor.
  */
 package mcvet;
-
 /**
  *
  * @author Julian
  */
 class NodoCliente {
 
+    public NodoCliente(int identificacion, String nombre, String direccion, int telefono) {
+        this.identificacion = identificacion;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+
+    }
+
     int identificacion;
     String nombre;
     String direccion;
     int telefono;
     NodoCliente siguiente;
+
+
+
+
 
     public int getId() {
         return identificacion;

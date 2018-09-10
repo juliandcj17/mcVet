@@ -1,6 +1,10 @@
 package mcvet.Formularios.Cliente;
 
+import mcvet.AgregarCliente;
 import javax.swing.table.DefaultTableModel;
+import mcvet.AgregarCliente;
+import mcvet.Formularios.Cliente.BuscarCliente;
+import mcvet.Formularios.Cliente.EliminarCliente;
 import mcvet.Formularios.Mascota.ListaMascota;
 
 /*
@@ -30,6 +34,7 @@ public class ListaClientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Lista Clientes");
+        
 
     }
 

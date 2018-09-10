@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mcvet.Formularios.Cliente;
+package mcvet;
 
+import mcvet.Formularios.Cliente.ListaClientes;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -190,6 +191,12 @@ public class AgregarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdentificacionActionPerformed
 
+    //Guardar los datos para poder llevarlos al otro formulario
+    public static String vIdentificacion = "";
+    public static String vNombre = "";
+    public static String vDireccion = "";
+    public static String vTelefono = "";
+
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
         UbicarNuevoCliente a = new UbicarNuevoCliente();
@@ -199,8 +206,10 @@ public class AgregarCliente extends javax.swing.JFrame {
                 || txtTelefono.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "No ha completado la información, por favor revise e intente nuevamente  ");
         } else {
-            //Agregar el nodo del nuevo liente a la lista
-            //JOptionPane.showMessageDialog(this, "papi añadido");
+            vIdentificacion = txtIdentificacion.getText();
+            vNombre = txtNombre.getText();
+            vDireccion = txtDireccion.getText();
+            vTelefono = txtTelefono.getText();         
             a.setVisible(true);
             dispose();
         }

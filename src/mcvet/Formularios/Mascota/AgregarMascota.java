@@ -189,10 +189,11 @@ public class AgregarMascota extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
+        
         if (txtIdentificacion.getText().equals("")
-                && txtNombre.getText().equals("")
-                && txtRaza.getText().equals("")
-                && txtRaza.getText().equals("")) {
+                || txtNombre.getText().equals("")
+                || txtRaza.getText().equals("")
+                || txtRaza.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "No ha completado la información, por favor revise e intente nuevamente");
         } else {
             // añadir la mascota y mostarla en la lista

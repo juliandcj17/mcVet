@@ -3,13 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mcvet.Formularios.Cliente;
+package mcvet;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import mcvet.AgregarCliente;
+import mcvet.Formularios.Cliente.ListaClientes;
+import static mcvet.AgregarCliente.vDireccion;
+import static mcvet.AgregarCliente.vIdentificacion;
+import static mcvet.AgregarCliente.vNombre;
+import static mcvet.AgregarCliente.vTelefono;
 import mcvet.Formularios.Mascota.ListaMascota;
+import mcvet.ListaCliente;
+import mcvet.NoExisteException;
+import mcvet.NodoCliente;
 
 /**
  *
@@ -52,12 +63,7 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
-        buttonGroup5 = new javax.swing.ButtonGroup();
-        buttonGroup6 = new javax.swing.ButtonGroup();
+        insertar = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         rbAlComienzo = new javax.swing.JRadioButton();
         rbAlFinal = new javax.swing.JRadioButton();
@@ -75,23 +81,33 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         jPanel1.setToolTipText("Opciones para agregar");
         jPanel1.setName("Opciones para agregar"); // NOI18N
 
-        buttonGroup1.add(rbAlComienzo);
+        insertar.add(rbAlComienzo);
         rbAlComienzo.setText("Al comienzo de la lista");
+        rbAlComienzo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbAlComienzoMouseClicked(evt);
+            }
+        });
         rbAlComienzo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbAlComienzoActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(rbAlFinal);
+        insertar.add(rbAlFinal);
         rbAlFinal.setText("Al final de la lista");
+        rbAlFinal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbAlFinalMouseClicked(evt);
+            }
+        });
         rbAlFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbAlFinalActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(rbAntesDelCliente);
+        insertar.add(rbAntesDelCliente);
         rbAntesDelCliente.setText("Antes del cliente con el codigo");
         rbAntesDelCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -104,8 +120,18 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(rbDespuesDelCliente);
+        insertar.add(rbDespuesDelCliente);
         rbDespuesDelCliente.setText("Después del cliente con el codigo");
+        rbDespuesDelCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbDespuesDelClienteMouseClicked(evt);
+            }
+        });
+        rbDespuesDelCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDespuesDelClienteActionPerformed(evt);
+            }
+        });
 
         antesDelCliente.setEnabled(false);
         antesDelCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +141,11 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         });
 
         despuesDelCliente.setEnabled(false);
+        despuesDelCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                despuesDelClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,7 +238,7 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
 
     private void rbAlComienzoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAlComienzoActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_rbAlComienzoActionPerformed
 
     private void rbAlFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAlFinalActionPerformed
@@ -231,31 +262,101 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
-
+        //crea la lista para los clientes
+        ListaCliente nuevoCliente = new ListaCliente();
         
+        //volver a la lista de clienets
+        ListaClientes a = new ListaClientes();
+
+        //convierte el String en entero 
+        int intIdentificacion = Integer.parseInt(vIdentificacion);
+        int intTelefono = Integer.parseInt(vTelefono);
+
+        if (rbAlComienzo.isSelected()) {
+            //invoca el metodo para añadir al comienzo
+            nuevoCliente.insertarAlComienzo(new NodoCliente(intIdentificacion, vNombre, vDireccion, intTelefono));
+            /*JOptionPane.showMessageDialog(this, "El cliente se insertó al comienzo de la lista con: "
+                    + "\n Identificación: " + intIdentificacion
+                    + "\n Nombre: " + vNombre
+                    + "\n Dirección: " + vDireccion
+                    + "\n Teléfono: " + intTelefono);*/
+            
+            a.setVisible(true);
+            dispose();
+  
+        } else if (rbAlFinal.isSelected()) {
+            //JOptionPane.showMessageDialog(this, "al final ");
+            nuevoCliente.insertarAlFinal(new NodoCliente(intIdentificacion, vNombre, vDireccion, intTelefono));
+            JOptionPane.showMessageDialog(this, "El cliente se insertó al final de la lista con: "
+                    + "\n Identificación: " + intIdentificacion
+                    + "\n Nombre: " + vNombre
+                    + "\n Dirección: " + vDireccion
+                    + "\n Teléfono: " + intTelefono);
+
+        } else if (rbAntesDelCliente.isSelected() && !antesDelCliente.getText().equals("")) {
+            try {
+                //JOptionPane.showMessageDialog(this, "antes de algun cliente");;
+                nuevoCliente.insertarAntesDe(intIdentificacion, new NodoCliente(intIdentificacion, vNombre, vDireccion, intTelefono));
+                JOptionPane.showMessageDialog(this, "El cliente se insertó en la lista antes del cliente con el codigo: " + intIdentificacion
+                        + "\n Identificación: " + intIdentificacion
+                        + "\n Nombre: " + vNombre
+                        + "\n Dirección: " + vDireccion
+                        + "\n Teléfono: " + intTelefono);
+            } catch (NoExisteException ex) {
+                Logger.getLogger(UbicarNuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (rbDespuesDelCliente.isSelected() && !despuesDelCliente.getText().equals("")) {
+            try {
+                nuevoCliente.insertarDespuesDe(intIdentificacion, new NodoCliente(intIdentificacion, vNombre, vDireccion, intTelefono));
+                //JOptionPane.showMessageDialog(this, "despues de alguncliente");;
+            } catch (NoExisteException ex) {
+                Logger.getLogger(UbicarNuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "no seleccionó ninguna ó no inserto el cliente");
+        }
+
+
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void rbAntesDelClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbAntesDelClienteMouseClicked
         // TODO add your handling code here:
-        //AntesDe.setEnabled(true);
-                if(rbAlComienzo.isSelected()){
-            //JOptionPane.showMessageDialog(this, "al comienzo ");
-            //invoca el metodo para añadir al comienzo
-        }else if(rbAlFinal.isSelected()){
-            JOptionPane.showMessageDialog(this, "al final ");
-        }else if(rbAntesDelCliente.isSelected()){
-            antesDelCliente.setEnabled(true);
-            despuesDelCliente.setEnabled(false);
-            //JOptionPane.showMessageDialog(this, "antes de un fulano  ");
-        }else if(rbDespuesDelCliente.isSelected()){
-            antesDelCliente.setEnabled(false);
-            despuesDelCliente.setEnabled(true);
-            
-            //JOptionPane.showMessageDialog(this, "despues del fulano");
-        }else{
-            JOptionPane.showMessageDialog(this, "no selecciono ninguna");
-        }
+        antesDelCliente.setEnabled(true);
+        despuesDelCliente.setEnabled(false);
+        despuesDelCliente.setText("");
     }//GEN-LAST:event_rbAntesDelClienteMouseClicked
+
+    private void rbDespuesDelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDespuesDelClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbDespuesDelClienteActionPerformed
+
+    private void despuesDelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_despuesDelClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_despuesDelClienteActionPerformed
+
+    private void rbAlComienzoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbAlComienzoMouseClicked
+        // TODO add your handling code here:
+        antesDelCliente.setEnabled(false);
+        despuesDelCliente.setEnabled(false);
+        antesDelCliente.setText("");
+        despuesDelCliente.setText("");
+    }//GEN-LAST:event_rbAlComienzoMouseClicked
+
+    private void rbDespuesDelClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbDespuesDelClienteMouseClicked
+        // TODO add your handling code here:
+        antesDelCliente.setEnabled(false);
+        despuesDelCliente.setEnabled(true);
+        antesDelCliente.setText("");
+    }//GEN-LAST:event_rbDespuesDelClienteMouseClicked
+
+    private void rbAlFinalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbAlFinalMouseClicked
+        // TODO add your handling code here:
+        antesDelCliente.setEnabled(false);
+        despuesDelCliente.setEnabled(false);
+        antesDelCliente.setText("");
+        despuesDelCliente.setText("");
+
+    }//GEN-LAST:event_rbAlFinalMouseClicked
 
     /**
      * @param args the command line arguments
@@ -296,13 +397,8 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
     private javax.swing.JTextField antesDelCliente;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnFinalizar;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.ButtonGroup buttonGroup5;
-    private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.JTextField despuesDelCliente;
+    private javax.swing.ButtonGroup insertar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton rbAlComienzo;
