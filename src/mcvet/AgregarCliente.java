@@ -199,7 +199,6 @@ public class AgregarCliente extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
-        UbicarNuevoCliente a = new UbicarNuevoCliente();
         if (txtIdentificacion.getText().equals("")
                 || txtNombre.getText().equals("")
                 || txtDireccion.getText().equals("")
@@ -209,8 +208,8 @@ public class AgregarCliente extends javax.swing.JFrame {
             vIdentificacion = txtIdentificacion.getText();
             vNombre = txtNombre.getText();
             vDireccion = txtDireccion.getText();
-            vTelefono = txtTelefono.getText();         
-            a.setVisible(true);
+            vTelefono = txtTelefono.getText();
+            UbicarNuevoCliente a = new UbicarNuevoCliente(); a.setVisible(true);
             dispose();
         }
 

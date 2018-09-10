@@ -6,11 +6,16 @@
 package mcvet.Formularios;
 
 import mcvet.Formularios.Cliente.ListaClientes;
+import static mcvet.Formularios.Principal.nuevoCliente;
+
+import mcvet.LCliente;
+import mcvet.NodoCliente;
 
 /**
  *
  * @author Julian
  */
+
 public class Principal extends javax.swing.JFrame {
 
     /**
@@ -21,8 +26,11 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Principal");
+        
+     NodoCliente c = new NodoCliente(1, "andres", "cl 90", 555);
+     nuevoCliente.insertarAlComienzo(c);
     }
-
+     public static LCliente nuevoCliente = new LCliente();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

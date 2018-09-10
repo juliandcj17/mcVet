@@ -8,7 +8,7 @@ package mcvet;
  *
  * @author Julian
  */
-class NodoCliente {
+public class NodoCliente {
 
     public NodoCliente(int identificacion, String nombre, String direccion, int telefono) {
         this.identificacion = identificacion;

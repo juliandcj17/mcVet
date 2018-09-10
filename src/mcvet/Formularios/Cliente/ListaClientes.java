@@ -18,7 +18,7 @@ import mcvet.Formularios.Mascota.ListaMascota;
  */
 public class ListaClientes extends javax.swing.JFrame {
 
-    DefaultTableModel tablaCleintes = new DefaultTableModel();
+    DefaultTableModel tablaClientes = new DefaultTableModel();
 
     /*tablaCleintes.addColumn("Identificación");
         tablaCleintes.addColumn("Nombre");
@@ -29,11 +29,13 @@ public class ListaClientes extends javax.swing.JFrame {
     /**
      * Creates new form ListaClientes
      */
-    public ListaClientes() {
+    public  ListaClientes() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Lista Clientes");
+        /*DefaultTableModel model = new DefaultTableModel();
+        model.addRow(os);*/
         
 
     }
@@ -84,6 +86,7 @@ public class ListaClientes extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        Clientes.setName("tablaUsers"); // NOI18N
         jScrollPane1.setViewportView(Clientes);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N

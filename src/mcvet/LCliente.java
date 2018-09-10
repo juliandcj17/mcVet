@@ -5,12 +5,14 @@
  */
 package mcvet;
 
+import static mcvet.Formularios.Principal.nuevoCliente;
+
 
 /**
  *
  * @author Julian
  */
-public class ListaCliente {
+public class LCliente {
 
     NodoCliente primero;
 
@@ -46,7 +48,7 @@ public class ListaCliente {
     // Buscar un cliente en la lista
     public NodoCliente buscarCliente(int contenido) {
 
-        NodoCliente actual = primero;
+        NodoCliente actual = nuevoCliente.primero;
 
         while (actual != null && actual.getId() != contenido) {
             actual = actual.getSiguiente();
@@ -56,32 +58,27 @@ public class ListaCliente {
     }
 
     // Localizar el último elemento
-    public NodoCliente localizarUltimo() {
-
-        NodoCliente actual = primero;
-
-        if (actual != null) {
+    public NodoCliente localizarUltimo() throws ListaVaciaException {
+        if (nuevoCliente.primero == null) {
+            throw new ListaVaciaException();
+        } else {
+            NodoCliente actual = nuevoCliente.primero;
             while (actual.getSiguiente() != null) {
                 actual = actual.getSiguiente();
             }
+            return actual;
         }
-
-        return actual;
     }
 
     // Localizar anterior
-    public NodoCliente localizarAnterior(int contenido) {
-
-        NodoCliente anterior = null;
-        NodoCliente actual = primero;
-
-        while (actual != null && actual.getId() != contenido) {
+    public NodoCliente localizarAnterior(int contenido){
+            NodoCliente anterior = null;
+            NodoCliente actual = primero;
+            while (actual != null && actual.getId() != contenido) {
             anterior = actual;
             actual = actual.getSiguiente();
-
-        }
-
-        return actual != null ? anterior : null;
+            }
+            return actual != null ? anterior : null;
     }
 
     // Calcular el número de los elementos de una lista
@@ -120,8 +117,8 @@ public class ListaCliente {
         if (buscarCliente(n.getId()) != null) {
             System.out.println("El cliente ya existe en la lista"); 
         } else {
-            n.setSiguiente(primero);
-            primero = n;
+            n.setSiguiente(nuevoCliente.primero);
+            nuevoCliente.primero = n;
         }
     }
 
@@ -136,7 +133,7 @@ public class ListaCliente {
         }
     }
 
-    public void insertarAlFinal(NodoCliente n) {
+    public void insertarAlFinal(NodoCliente n) throws ListaVaciaException {
         //Validamos que el ciente no exista en la lista
         if (buscarCliente(n.getId()) != null) {
             System.out.println("El cliente ya existe en la lista"); 
@@ -149,14 +146,14 @@ public class ListaCliente {
     }
 
     // Insertar un elemento antes de uno del que se tiene la referencia
-    public void insertarAntesDe(int identificacion, NodoCliente n) throws NoExisteException{
+    public void insertarAntesDe(int codigo, NodoCliente n) throws NoExisteException{
         //Validamos que el ciente no exista en la lista
         if (buscarCliente(n.getId()) != null) {
             System.out.println("El cliente ya existe en la lista"); 
         } else {
-            NodoCliente anterior = localizarAnterior(identificacion);
+            NodoCliente anterior = localizarAnterior(codigo);
             if (anterior == null) {
-                 throw new NoExisteException(identificacion);
+                 throw new NoExisteException(codigo);
             } else {
                 anterior.insertarDespues(n);
             }
@@ -164,7 +161,7 @@ public class ListaCliente {
        
     }
 
-    public void invertirLista() {
+    public void invertirLista() throws ListaVaciaException {
         NodoCliente cabeza = primero;
         int i = longitud() - 1;
         while (i > 0) {

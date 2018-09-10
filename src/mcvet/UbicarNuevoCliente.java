@@ -18,9 +18,13 @@ import static mcvet.AgregarCliente.vIdentificacion;
 import static mcvet.AgregarCliente.vNombre;
 import static mcvet.AgregarCliente.vTelefono;
 import mcvet.Formularios.Mascota.ListaMascota;
-import mcvet.ListaCliente;
+import mcvet.LCliente;
 import mcvet.NoExisteException;
 import mcvet.NodoCliente;
+import mcvet.LCliente;
+import mcvet.Formularios.Principal;
+import static mcvet.Formularios.Principal.nuevoCliente;
+
 
 /**
  *
@@ -39,8 +43,11 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         // llama al metodo que valida que solo sean numeros
         SoloNumeros(antesDelCliente);
         SoloNumeros(despuesDelCliente);
+        
+      
+        
     }
-
+    
     //Metodo que balida que la entrada solo sea de numeros
     public void SoloNumeros(JTextField a) {
         a.addKeyListener(new KeyAdapter() {
@@ -134,6 +141,7 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         });
 
         antesDelCliente.setEnabled(false);
+        antesDelCliente.setName("txtCodigoAntes"); // NOI18N
         antesDelCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 antesDelClienteActionPerformed(evt);
@@ -141,6 +149,7 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         });
 
         despuesDelCliente.setEnabled(false);
+        despuesDelCliente.setName("txtCodigoDespues"); // NOI18N
         despuesDelCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 despuesDelClienteActionPerformed(evt);
@@ -259,11 +268,11 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
         a.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
         //crea la lista para los clientes
-        ListaCliente nuevoCliente = new ListaCliente();
+        
         
         //volver a la lista de clienets
         ListaClientes a = new ListaClientes();
@@ -285,18 +294,23 @@ public class UbicarNuevoCliente extends javax.swing.JFrame {
             dispose();
   
         } else if (rbAlFinal.isSelected()) {
-            //JOptionPane.showMessageDialog(this, "al final ");
-            nuevoCliente.insertarAlFinal(new NodoCliente(intIdentificacion, vNombre, vDireccion, intTelefono));
-            JOptionPane.showMessageDialog(this, "El cliente se insertó al final de la lista con: "
+            try {
+                //JOptionPane.showMessageDialog(this, "al final ");
+                nuevoCliente.insertarAlFinal(new NodoCliente(intIdentificacion, vNombre, vDireccion, intTelefono));
+                 JOptionPane.showMessageDialog(this, "El cliente se insertó al final de la lista con: "
                     + "\n Identificación: " + intIdentificacion
                     + "\n Nombre: " + vNombre
                     + "\n Dirección: " + vDireccion
                     + "\n Teléfono: " + intTelefono);
-
+            } catch (ListaVaciaException ex) {
+                Logger.getLogger(UbicarNuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (rbAntesDelCliente.isSelected() && !antesDelCliente.getText().equals("")) {
             try {
                 //JOptionPane.showMessageDialog(this, "antes de algun cliente");;
-                nuevoCliente.insertarAntesDe(intIdentificacion, new NodoCliente(intIdentificacion, vNombre, vDireccion, intTelefono));
+                int codigo = Integer.parseInt(antesDelCliente.getText());
+                
+                nuevoCliente.insertarAntesDe(codigo, new NodoCliente(intIdentificacion, vNombre, vDireccion, intTelefono));
                 JOptionPane.showMessageDialog(this, "El cliente se insertó en la lista antes del cliente con el codigo: " + intIdentificacion
                         + "\n Identificación: " + intIdentificacion
                         + "\n Nombre: " + vNombre
